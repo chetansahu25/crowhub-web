@@ -1,26 +1,68 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+/* 1. Define the Color Logic (HSL Values) */
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* LIGHT MODE DEFAULTS */
+    --background: 0 0% 100%; /* White */
+    --foreground: 0 0% 5%; /* Darkest variation */
+
+    /* Semantic Colors */
+    --primary: 251 75% 59%; /* Your Brand Purple */
+    --primary-foreground: 0 0% 100%; /* White text on purple */
+
+    --muted: 0 0% 96%; /* Lightest variation */
+    --muted-foreground: 0 0% 42%; /* Dark variation */
+
+    --border: 0 0% 62%; /* Medium variation */
+    --input: 0 0% 90%; /* Light variation */
+
+    --radius: 0.5rem;
+  }
+
+  /* DARK MODE OVERRIDES (Selector strategy) */
+  .dark {
+    --background: 0 0% 5%; /* Darkest variation */
+    --foreground: 0 0% 100%; /* White */
+
+    --primary: 251 75% 59%; /* Keep purple or adjust slightly */
+    --primary-foreground: 0 0% 100%;
+
+    --muted: 0 0% 15%; /* Custom dark grey */
+    --muted-foreground: 0 0% 62%;
+
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* 2. Map Variables to Tailwind Utilities */
+/* In v4, we use the @theme block to extend the defaults */
+@theme {
+  /* This tells Tailwind: "When I type bg-background, use var(--background)" */
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+}
+
+/* 3. Apply Base Styles */
+@layer base {
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    /* In v4, border-color defaults need to be set explicitly if you use 'border' class alone */
+    border-color: var(--color-border);
+  }
 }
