@@ -1,6 +1,3 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
 echo "🏗️  Architect Gatekeeper: Checking your code..."
 
 # 1. Run Type Check on the whole project (standard for Next.js)
