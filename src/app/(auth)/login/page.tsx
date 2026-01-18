@@ -1,53 +1,132 @@
+'use client';
+
 import { Button } from '@/components/ui/button';
 import { Field, FieldGroup, FieldLabel, FieldSet } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
+import LoginBg from '../../../../public/login-bg.png';
+import EyeClosed from '../../../../public/svgs/eye-closed.svg';
+import Image from 'next/image';
 import Link from 'next/link';
+import { useState } from 'react';
+import { EyeIcon } from 'lucide-react';
+import { set } from 'zod';
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+} from '@/components/ui/input-group';
 
 const Login = () => {
+  const [showPassword, setShowPassword] = useState(true);
+  function handleShowPassword() {
+    setShowPassword((prev) => !prev);
+  }
   return (
-    <div>
-      <div>
+    <div className="grid max-h-screen grid-cols-1 bg-black md:grid-cols-2">
+      <div className="login-gradient flex h-screen flex-col items-center justify-center *:w-5/6 md:*:w-95">
         {/* 1st column */}
-        <div>
-          <h1>Welcome to Crowhub 👋</h1>
-          <span>
-            Don&apos;t have an account? <Link href={'/signup'}>Register</Link>
+        <div className="flex flex-col justify-start">
+          <h1 className="font-lato text-3xl font-semibold tracking-tight text-white md:text-[32px]">
+            Welcome to Crowhub 👋
+          </h1>
+          <span className="text-[#565073]">
+            Don&apos;t have an account? &nbsp;
+            <Link href={'/signup'} className="text-primary-gradient">
+              Register
+            </Link>
           </span>
         </div>
-        <div>
+        <div className="w-full pt-8 text-white">
           <form action="">
             <FieldGroup>
               <FieldSet>
                 <Field>
-                  <FieldLabel htmlFor="unique-identifier">
-                    Email or Mobile Number
+                  <FieldLabel
+                    htmlFor="unique-identifier"
+                    className="font-lato font-semibold"
+                  >
+                    Email
                   </FieldLabel>
                   <Input
                     id="unique-identifier"
                     placeholder="E.g. johndoe@example.com"
                     type="text"
+                    className="font-lato border border-[#ffffff1a] bg-[#ffffff1a] py-2.5 pr-3 pl-6 text-[16px] text-[#565073] backdrop-blur-xs placeholder:text-[#565073]"
                   />
                 </Field>
                 <Field>
                   <FieldLabel htmlFor="password">Password</FieldLabel>
-                  <Input
-                    id="password"
-                    type="password"
-                    placeholder="Enter Password"
-                  />
+                  <div className="flex flex-col">
+                    <InputGroup className="font-lato border border-[#ffffff1a] bg-[#ffffff1a] py-2.5 pr-3 pl-6 text-[16px] text-[#565073] backdrop-blur-xs">
+                      <InputGroupInput
+                        placeholder="Enter password"
+                        type="password"
+                        className="p-0 placeholder:text-[#565073]"
+                      />
+                      <InputGroupAddon align="inline-end" className="p-0">
+                        {/* <SearchIcon /> */}
+                        {showPassword ? (
+                          <EyeIcon
+                            width={30}
+                            className="text-white"
+                            onClick={handleShowPassword}
+                          />
+                        ) : (
+                          <Image
+                            src={EyeClosed}
+                            alt="eye-closed"
+                            width={20}
+                            height={20}
+                            className="h-5 w-5"
+                            onClick={handleShowPassword}
+                          />
+                        )}
+                      </InputGroupAddon>
+                    </InputGroup>
+                    <Link
+                      href={'#'}
+                      className="font-lato py-2 text-[16px] font-semibold text-[#565073] underline"
+                    >
+                      Forgot password?
+                    </Link>
+                  </div>
                 </Field>
+                <Button
+                  type="submit"
+                  className="font-lato cursor-pointer rounded-full border-2 border-[#ffffff1a] bg-[#ffffff1a] px-6 py-6 text-[20px] font-bold tracking-tight text-white hover:scale-105 hover:bg-[#ffffff1a]"
+                >
+                  Continue
+                </Button>
               </FieldSet>
-              <FieldSet>
-                <Link href={'#'}>Forgot Password</Link>
-              </FieldSet>
-              <Field>
-                <Button type="submit">Submit</Button>
-              </Field>
             </FieldGroup>
           </form>
         </div>
+        <div className="absolute bottom-5 w-90.25 text-center md:bottom-20">
+          <span className="font-lato text-[14px] font-semibold text-[#565073] *:underline *:decoration-dotted">
+            By continuing, you agree to our <br />
+            <Link href={'#'}>Terms of Service,</Link>
+            &nbsp;
+            <Link href={'#'}>Privacy Policy</Link>
+            &nbsp; & &nbsp;
+            <Link href={'#'}>Content Policy</Link>
+          </span>
+        </div>
       </div>
-      <div>{/* 2nd column */}</div>
+      <div className="hidden md:block">
+        {/* 2nd column */}
+        <Image
+          src={LoginBg}
+          alt="simple floating phones"
+          className="h-screen w-full opacity-40"
+        />
+        <div className="w-110.73 absolute top-2/5 left-3/5 flex flex-col justify-start text-white">
+          <span className="font-lato text-5xl font-bold">Swipe Smarter 🧠</span>
+          <span className="font-satisfy text-3xl">
+            Professional connections that actually mean something...
+          </span>
+        </div>
+      </div>
     </div>
   );
 };
