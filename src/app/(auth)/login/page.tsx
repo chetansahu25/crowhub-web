@@ -103,7 +103,7 @@ const Login = () => {
           </form>
         </div>
         <div className="absolute bottom-5 w-90.25 text-center md:bottom-20">
-          <span className="font-lato text-[14px] font-semibold text-[#565073] *:underline *:decoration-dotted">
+          <span className="font-lato text-[14px] font-semibold text-[#565073] *:underline *:decoration-dotted *:hover:text-[#C28CFF]">
             By continuing, you agree to our <br />
             <Link href={'#'}>Terms of Service,</Link>
             &nbsp;
