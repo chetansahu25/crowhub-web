@@ -65,7 +65,6 @@ const Login = () => {
                         className="p-0 placeholder:text-[#565073]"
                       />
                       <InputGroupAddon align="inline-end" className="p-0">
-                        {/* <SearchIcon /> */}
                         {showPassword ? (
                           <EyeIcon
                             width={30}
