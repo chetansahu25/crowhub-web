@@ -1,11 +1,22 @@
 import type { Metadata } from 'next';
-import { Inter_Tight } from 'next/font/google';
-import { Poppins } from 'next/font/google';
+import { Poppins, Lato, Inter_Tight, Satisfy } from 'next/font/google';
 import './globals.css';
 
 const interTight = Inter_Tight({
   variable: '--font-inter-tight',
   subsets: ['latin'],
+});
+
+const lato = Lato({
+  variable: '--font-lato',
+  subsets: ['latin'],
+  weight: ['100', '300', '400', '700', '900'],
+});
+
+const satisfy = Satisfy({
+  variable: '--font-satisfy',
+  subsets: ['latin'],
+  weight: ['400'],
 });
 
 const poppins = Poppins({
@@ -50,7 +61,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${interTight.variable} ${poppins.variable} min-h-full antialiased`}
+        className={`${interTight.variable} ${poppins.variable} ${lato.variable} ${satisfy.variable} min-h-full antialiased`}
       >
         {children}
       </body>
